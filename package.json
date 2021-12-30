@@ -1,0 +1,24 @@
+{
+  "name": "Jornaut",
+  "version": "1.0.0",
+  "description": "",
+  "main": "extensionHostProcess.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jornaut/Jornaut.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jornaut/Jornaut/issues"
+  },
+  "homepage": "https://github.com/Jornaut/Jornaut#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "googleapis": "^92.0.0"
+  }
+}
