@@ -8,6 +8,7 @@ from   requests.structures import CaseInsensitiveDict
 from   pydub               import AudioSegment
 import shutil
 import unicodedata
+from ApiKeys import GetApiKeys
 
 class GetAudioFile:
     def __init__(self, title, text):
@@ -70,7 +71,7 @@ class PyCurl:
     def Resemble(self):
         url = "https://app.resemble.ai/api/v1/projects/9d2b87ed/clips"
         headers = CaseInsensitiveDict()
-        headers["Authorization"] = "Bearer orTCdxTt0zQJP7gybct9rgtt"
+        headers["Authorization"] = GetApiKeys.ResembleAI().ApiKey
         headers["Content-Type"] = "application/json"
         data = '''
         {
