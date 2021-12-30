@@ -1,6 +1,7 @@
 import yake
 import json
 import requests
+from ApiKeys import GetApiKeys
 
 class AddOpinionImages:
     def __init__(self, text, html):
@@ -27,4 +28,4 @@ class GetImages:
         self.keywords = self.custom_kw_extractor.extract_keywords(self.text)
     def GetImgUrl(self):
         for keyword in self.keywords:
-            self.ImgUrls.append(json.loads(requests.request("GET", "https://bing-image-search1.p.rapidapi.com/images/search", headers={'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",'x-rapidapi-key': "8769ddbfa4msh391956d76595d5dp1c6ab0jsn1a20b216ae1c"}, params={"q":keyword[0]}).text)["value"][0]["contentUrl"])
+            self.ImgUrls.append(json.loads(requests.request("GET", "https://bing-image-search1.p.rapidapi.com/images/search", headers={'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",'x-rapidapi-key': GetApiKeys.Bing().ApiKey}, params={"q":keyword[0]}).text)["value"][0]["contentUrl"])
