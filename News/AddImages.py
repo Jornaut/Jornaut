@@ -7,10 +7,10 @@ class AddImages:
     def __init__(self, text, html):
         self.html = html
         self.GetPar()
-        self.response = ConectHtmlUrl(html, GetImages(text, self.ParIdx).ImgUrls).html
+        self.response = ConectHtmlUrl(html, GetImages(text, self.ParIdx).ImgUrls, self.ParIdx).html
     def GetPar(self):
         self.ParTag = '</p>'
-        self.ParIdx = (self.find_all(self.html, self.ParTag))
+        self.ParIdx = self.find_all(str(self.html), self.ParTag)
     def find_all(self, a_str, sub):
         start = 0
         while True:
@@ -21,6 +21,7 @@ class AddImages:
 
 class GetImages:
     def __init__(self, text, ParIdx):
+        self.ParIdx = ParIdx
         self.DefInp(text)
         self.GetKey()
         self.GetKey()
@@ -29,7 +30,7 @@ class GetImages:
         self.language = "en"
         self.max_ngram_size = 1
         self.deduplication_threshold = 0.9
-        self.numOfKeywords = int(self.ParIdx/3+2)
+        self.numOfKeywords = int(len(list(self.ParIdx))/3+2)
         self.text = text
         self.response = []
         self.ImgUrls = []
@@ -38,12 +39,13 @@ class GetImages:
         self.keywords = self.custom_kw_extractor.extract_keywords(self.text)
     def GetImgUrl(self):
         for keyword in self.keywords:
-            self.ImgUrls.append(json.loads(requests.request("GET", "https://bing-image-search1.p.rapidapi.com/images/search", headers={'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",'x-rapidapi-key': GetApiKeys.Bing().ApiKey}, params={"q":keyword[0]}).text)["value"][0]["contentUrl"])
+            self.ImgUrls.append(json.loads(requests.request("GET", "https://bing-image-search1.p.rapidapi.com/images/search", headers={'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",'x-rapidapi-key': GetApiKeys.Bing}, params={"q":keyword[0]}).text)["value"][0]["contentUrl"])
         
 class ConectHtmlUrl:
-    def __init__(self, html, ImgUrls):
+    def __init__(self, html, ImgUrls, ParIdx):
         self.DefInp(html, ImgUrls)
-        self.GetPar()
+        self.ParIdx = ParIdx
+        # self.GetPar()
         self.PutImg()
     def DefInp(self, html, ImgUrls):
         self.html = html

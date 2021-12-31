@@ -11,6 +11,6 @@ class SearchTutorial:
         self.data = str(self.webUrl, 'utf-8')
         self.soup = BeautifulSoup(self.data, "html.parser")
         self.html = self.soup.find_all("li", {"class": "tutorial tutorial"})
-        for url in self.html:
-            if str(url.find("span", {"class":"publish-date timeago"}))[42:52] == str(date.today()):
-                self.urls.append("https://www.digitalocean.com"+url.find("a").get('href'))
+        # for url in self.html:
+        #     if str(url.find("span", {"class":"publish-date timeago"}))[42:52] == str(date.today()):
+        #         self.urls.append("https://www.digitalocean.com"+url.find("a").get('href'))

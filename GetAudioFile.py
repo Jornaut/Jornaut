@@ -28,27 +28,29 @@ class GetAudioFile:
             try: 
                 x = text[len(y):min(ponto, pontoexc, pontoint)]
                 print(x)
-            except Exception: x = text[len(y):]
-            try: 
-                    self.Exec(x, c)
-                    err =  str(self.response)[11]
-                    print(err)
-            except Exception: pass
-            if err == "4":
-                x = x[:int(len(x)/2)]
+            except Exception: x = text[len(y):len(y)+100]
+            try:
                 self.Exec(x, c)
-            y += 2*x
+                err =  str(self.response)[11]
+                print(err)
+            except Exception: pass
+            # if err == "4":
+            #     x = x[:int(len(x)/2)]
+            #     self.Exec(x, c)
+            y += x
             c += 1
-        z = 0
-        a = []
-        while z+2 <= c:
-            self.ConcAud('c:/xampp/htdocs/jornaut/adds/tmp/'+self.title+str(z)+'.wav','c:/xampp/htdocs/jornaut/adds/tmp/'+self.title+str(z+1)+'.wav')
-            os.remove('c:/xampp/htdocs/jornaut/adds/tmp/'+self.title+str(z)+'.wav')
-            z += 1
-        src_folder = 'c:/xampp/htdocs/jornaut/adds/tmp/'
-        dst_folder = 'c:/xampp/htdocs/jornaut/adds/'
-        file_name  = self.title+str(z)+'.wav'
-        shutil.move(src_folder + file_name, dst_folder + self.title+'.wav')
+        try:
+            z = 0
+            a = []
+            while z+2 <= c:
+                self.ConcAud('c:/xampp/htdocs/jornaut/adds/tmp/'+self.title+str(z)+'.wav','c:/xampp/htdocs/jornaut/adds/tmp/'+self.title+str(z+1)+'.wav')
+                os.remove('c:/xampp/htdocs/jornaut/adds/tmp/'+self.title+str(z)+'.wav')
+                z += 1
+            src_folder = 'c:/xampp/htdocs/jornaut/adds/tmp/'
+            dst_folder = 'c:/xampp/htdocs/jornaut/adds/'
+            file_name  = self.title+str(z)+'.wav'
+            shutil.move(src_folder + file_name, dst_folder + self.title+'.wav')
+        except Exception: pass
 
 
     def ConcAud(self, file1, file2):
@@ -71,7 +73,7 @@ class PyCurl:
     def Resemble(self):
         url = "https://app.resemble.ai/api/v1/projects/9d2b87ed/clips"
         headers = CaseInsensitiveDict()
-        headers["Authorization"] = GetApiKeys.ResembleAI().ApiKey
+        headers["Authorization"] = GetApiKeys.ResembleAI
         headers["Content-Type"] = "application/json"
         data = '''
         {

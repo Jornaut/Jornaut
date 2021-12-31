@@ -28,4 +28,4 @@ class GetImages:
         self.keywords = self.custom_kw_extractor.extract_keywords(self.text)
     def GetImgUrl(self):
         for keyword in self.keywords:
-            self.ImgUrls.append(json.loads(requests.request("GET", "https://bing-image-search1.p.rapidapi.com/images/search", headers={'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",'x-rapidapi-key': GetApiKeys.Bing().ApiKey}, params={"q":keyword[0]}).text)["value"][0]["contentUrl"])
+            self.ImgUrls.append(json.loads(requests.request("GET", "https://bing-image-search1.p.rapidapi.com/images/search", headers={'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",'x-rapidapi-key': GetApiKeys.Bing}, params={"q":keyword[0]}).text)["value"][0]["contentUrl"])

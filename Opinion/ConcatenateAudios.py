@@ -23,7 +23,7 @@ class ConcatenateAudios:
                 #try: 
                 AudioSegment.from_wav(item[0]).export(item[0][:-3]+'mp3', format="mp3")
                 img_data = requests.get(item[1]).content
-                with open(("C:/xampp/htdocs/Jornaut/adds/"+item[0][29:-4]+item[1][-4:]).replace(" ", "-").replace("'", "").replace('"', "").replace("|", ""), 'wb') as handler:
+                with open(("C:/xampp/htdocs/Jornaut/adds/"+item[0][29:-4]+item[1][-4:]).replace(" ", "-").replace("'", "").replace('"', "").replace("|", "").replace(":", ""), 'wb') as handler:
                     handler.write(img_data)
                 self.ConcAud[self.ConcAud.index(item)][1] = "C:/xampp/htdocs/Jornaut/adds/"+item[0][29:-4]+item[1][-4:]
                 item[1] = self.ConcAud[self.ConcAud.index(item)][1]
